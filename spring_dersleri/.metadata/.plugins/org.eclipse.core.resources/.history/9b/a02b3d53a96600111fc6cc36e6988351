@@ -1,0 +1,11 @@
+package com.ibrahimcan.exception;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@A
+public class ApiError {
+
+}

@@ -1,0 +1,42 @@
+package com.ibrahimcan.exception;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+	//SPring validationdan fırlatılan hataları alıp yönetmek ve adam akıllı response dönmek.
+	
+	@ExceptionHandler(value = MethodArgumentNotValidException.class)
+	public void handleMethodArgumentValidException(MethodArgumentNotValidException ex) {
+		Map<String, List<String>> errorsMap = new HashMap<>();
+		for(ObjectError error : ex.getBindingResult().getAllErrors()) {
+			String fieldName =((FieldError)error).getField();
+			if(errorsMap.containsKey(fieldName)) {
+				errorsMap.put(fieldName, addList(errorsMap.get(fieldName), error.getDefaultMessage()));
+
+			}else {
+				errorsMap.put(fieldName, addList(new ArrayList<>(), error.getDefaultMessage()));
+			}
+		}
+	}
+	
+	private List<String> addList(List<String> list, String newValue){
+		list.add(newValue);
+		return list;
+	}
+	
+	private ApiError createApiError(Map<String, List<String>> errorsMap) {
+		ApiError apiError = new ApiError();		
+	}
+	
+
+}

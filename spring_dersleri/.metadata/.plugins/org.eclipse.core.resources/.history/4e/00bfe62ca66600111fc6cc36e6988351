@@ -1,0 +1,15 @@
+package com.ibrahimcan.exception;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+	//SPring validationdan fırlatılan hataları alıp yönetmek ve adam akıllı response dönmek.
+	
+	@ExceptionHandler()
+	public void handleMethodArgumentValidException() {
+		
+	}
+
+}

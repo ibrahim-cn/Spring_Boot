@@ -1,0 +1,6 @@
+package com.ibrahimcan.exception;
+
+@C
+public class GlobalExceptionHandler {
+
+}
